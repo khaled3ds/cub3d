@@ -24,43 +24,42 @@ void	free_all(char **words)
 	free(words);
 }
 
-void path_checker(t_game *game,int i)
+void	path_checker(t_game *game, int i)
 {
 	if (game->textures[i].path)
-    	exit(printf("duplicate texture"));
+		exit(printf("duplicate texture"));
 }
 
-void color_parser_helper(int arr[],char *substring)
+void	color_parser_helper(int arr[], char *substring)
 {
-	char **strings;
-	int k;
+	char	**strings;
+	int		k;
 
 	k = -1;
-	strings = ft_split(substring,',');
+	strings = ft_split(substring, ',');
 	if (!strings)
-    	exit(printf("malloc error"));
+		exit(printf("malloc error"));
 	if (!strings[0] || !strings[1] || !strings[2])
-    	exit(printf("invalid color format"));
+		exit(printf("invalid color format"));
 	while (++k < 3)
-        arr[k] = ft_atoi(strings[k]);
-    if (arr[0] < 0 || arr[0] > 255 ||arr[1] < 0 
-        || arr[1] > 255 || arr[2] < 0 || arr[2] > 255)
-    exit(printf("invlaid numbers"));
-	 free_all(strings);
-	  free(substring);
+		arr[k] = ft_atoi(strings[k]);
+	if (arr[0] < 0 || arr[0] > 255 || arr[1] < 0 || arr[1] > 255 || arr[2] < 0
+		|| arr[2] > 255)
+		exit(printf("invlaid numbers"));
+	free_all(strings);
+	free(substring);
 }
 
-void free_game(t_game *game)
+void	free_game(t_game *game)
 {
-	int i;
+	int	i;
 
-    i = 0;
-    while (i < 4)
-    {
-        if (game->textures[i].path)
-            free(game->textures[i].path);
-        i++;
-    }
-    free_all(game->map);
-	
+	i = 0;
+	while (i < 4)
+	{
+		if (game->textures[i].path)
+			free(game->textures[i].path);
+		i++;
+	}
+	free_all(game->map);
 }

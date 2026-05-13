@@ -29,17 +29,17 @@ static void	right_input(int argc, char *argv)
 	}
 }
 
-int main(int argc,char **argv)
+int	main(int argc, char **argv)
 {
-	char **file;
-	t_game game;
-	
-    right_input(argc, argv[1]);
+	char	**file;
+	t_game	game;
+
+	right_input(argc, argv[1]);
 	file = inputer(argv[1]);
 	if (!file)
-	return (write(2, "Error\n", 6));
+		return (write(2, "Error\n", 6));
 	ft_memset(&game, 0, sizeof(t_game));
-	parse_data(&game,file);
+	parse_data(&game, file);
 	if (!isvalid(game.map))
 	{
 		free_game(&game);

@@ -12,26 +12,26 @@
 
 #include "../header/game.h"
 
-static int in_bound(char **map,int i,int j)
+static int	in_bound(char **map, int i, int j)
 {
-    char c;
+	char	c;
 
-    if (i < 0 || ! map[i] || j < 0 || ! map[i][j] || map[i][j] == ' ')
-        return (0);
-    c = map[i][j];
-    if (c == '0')
-        return (1);
-    if (c == '1')
-        return (1);
-    if (c == 'W')
-        return (1);
-    if (c == 'E')
-        return (1);
-    if (c == 'N')
-        return (1);
-    if (c == 'S')
-        return (1);
-    return (0);    
+	if (i < 0 || !map[i] || j < 0 || !map[i][j] || map[i][j] == ' ')
+		return (0);
+	c = map[i][j];
+	if (c == '0')
+		return (1);
+	if (c == '1')
+		return (1);
+	if (c == 'W')
+		return (1);
+	if (c == 'E')
+		return (1);
+	if (c == 'N')
+		return (1);
+	if (c == 'S')
+		return (1);
+	return (0);
 }
 
 static int	walls(char **map)
@@ -47,11 +47,11 @@ static int	walls(char **map)
 		{
 			if (map[i][j] != '1')
 			{
-                if (!in_bound(map, i, j + 1) || !in_bound(map, i, j - 1)
-                         || !in_bound(map, i + 1, j) || !in_bound(map, i - 1, j))
-                    return (0);
-            }    
-            j++;
+				if (!in_bound(map, i, j + 1) || !in_bound(map, i, j - 1)
+					|| !in_bound(map, i + 1, j) || !in_bound(map, i - 1, j))
+					return (0);
+			}
+			j++;
 		}
 		i++;
 	}
@@ -94,7 +94,7 @@ static int	player(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' ||
-                    map[i][j] == 'E' || map[i][j] == 'W')
+				map[i][j] == 'E' || map[i][j] == 'W')
 				players++;
 			j++;
 		}
@@ -108,7 +108,7 @@ static int	player(char **map)
 int	isvalid(char **map)
 {
 	if (!player(map) || !valid_char(map))
-        return (0);
+		return (0);
 	if (!walls(map))
 		return (0);
 	return (1);

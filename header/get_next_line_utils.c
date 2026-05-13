@@ -44,7 +44,7 @@ char	*ft_strjoi(char *s1, char *s2)
 	if (res == NULL)
 	{
 		if (s1)
-			free (s1);
+			free(s1);
 		return (NULL);
 	}
 	i = 0;
