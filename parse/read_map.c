@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:45:10 by kadas             #+#    #+#             */
-/*   Updated: 2026/04/19 19:41:30 by kadas            ###   ########.fr       */
+/*   Updated: 2026/05/13 01:56:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*map_reader(char *all, int fd)
 	return (all);
 }
 
-char	**mapper(char *cub)
+char	**inputer(char *cub)
 {
 	int		fd;
 	char	**map;

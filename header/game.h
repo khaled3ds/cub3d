@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:30:29 by kadas             #+#    #+#             */
-/*   Updated: 2026/04/19 18:31:34 by kadas            ###   ########.fr       */
+/*   Updated: 2026/05/13 03:13:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_player
 
 typedef struct s_texture
 {
+    char    *path;
     void    *img;
     int     *addr;
     int     width;
@@ -54,6 +55,8 @@ typedef struct s_game
     int         map_height;
     int         floor_color;
     int         ceiling_color;
+    int         has_floor;
+    int         has_ceiling;
     t_texture   textures[4];
     t_player    player;
     void        *mlx;
@@ -67,7 +70,10 @@ typedef struct s_game
 } t_game;
 char	*get_next_line(int fd);
 char	*ft_strjoi(char *s1, char *s2);
-char	**mapper(char *cub);
+char	**inputer(char *cub);
 int	    isvalid(char **map);
 void	free_all(char **words);
+void path_checker(t_game *game,int i);
+void parse_data(t_game *game,char **file);
+void color_parser_helper(int arr[],char *substring);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:43:14 by kadas             #+#    #+#             */
-/*   Updated: 2026/04/19 18:32:04 by kadas            ###   ########.fr       */
+/*   Updated: 2026/05/13 02:57:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ static void	right_input(int argc, char *argv)
 
 int main(int argc,char **argv)
 {
-	char **map;
+	char **file;
+	t_game game;
 	
     right_input(argc, argv[1]);
-	map = mapper(argv[1]);
-	if (!map)
+	file = inputer(argv[1]);
+	if (!file)
 		return (write(2, "Error\n", 6));
-	if (!isvalid(map))
+	parse_data(&game,file);
+	if (!isvalid(game.map))
 	{
-		free_all(map);
+		free_all(game.map);
 		return (write(2, "Error\n", 6));
 	}
-	
 }
