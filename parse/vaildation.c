@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vaildation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 18:16:12 by kadas             #+#    #+#             */
-/*   Updated: 2026/04/19 20:04:16 by kadas            ###   ########.fr       */
+/*   Updated: 2026/05/13 21:14:14 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	valid_char(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
-				&& map[i][j] != 'E' && map[i][j] != 'S' && map[i][j] != 'W')
+				&& map[i][j] != 'E' && map[i][j] != 'S' && map[i][j] != 'W'
+				&& map[i][j] != ' ')
 				return (0);
 			j++;
 		}

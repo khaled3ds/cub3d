@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:46:40 by kadas             #+#    #+#             */
-/*   Updated: 2026/05/13 03:15:39 by marvin           ###   ########.fr       */
+/*   Updated: 2026/05/13 21:09:14 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,19 @@ void color_parser_helper(int arr[],char *substring)
     exit(printf("invlaid numbers"));
 	 free_all(strings);
 	  free(substring);
+}
+
+void free_game(t_game *game)
+{
+	int i;
+
+    i = 0;
+    while (i < 4)
+    {
+        if (game->textures[i].path)
+            free(game->textures[i].path);
+        i++;
+    }
+    free_all(game->map);
+	
 }

@@ -108,6 +108,7 @@ static void map_parser(char **file,int i,t_game *game)
     map[j] = NULL;
     game->map = map;
 }
+
 void parse_data(t_game *game,char **file)
 {
     int i;
