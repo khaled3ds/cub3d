@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:46:40 by kadas             #+#    #+#             */
-/*   Updated: 2026/05/13 21:09:14 by kadas            ###   ########.fr       */
+/*   Updated: 2026/06/05 10:37:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_all(char **words)
 
 void	path_checker(t_game *game, int i)
 {
-	if (game->textures[i].path)
+	if (game->parser.textures[i].path)
 		exit(printf("duplicate texture"));
 }
 
@@ -57,9 +57,9 @@ void	free_game(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (game->textures[i].path)
-			free(game->textures[i].path);
+		if (game->parser.textures[i].path)
+			free(game->parser.textures[i].path);
 		i++;
 	}
-	free_all(game->map);
+	free_all(game->parser.map);
 }

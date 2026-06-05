@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 01:47:52 by marvin            #+#    #+#             */
-/*   Updated: 2026/05/13 01:47:52 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/05 10:32:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ static void	path_parser(char **file, int i, int j, t_game *game)
 	if (file[i][0] == 'N')
 	{
 		path_checker(game, NO);
-		game->textures[NO].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
+		game->parser.textures[NO].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
 	}
 	if (file[i][0] == 'S')
 	{
 		path_checker(game, SO);
-		game->textures[SO].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
+		game->parser.textures[SO].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
 	}
 	if (file[i][0] == 'E')
 	{
 		path_checker(game, EA);
-		game->textures[EA].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
+		game->parser.textures[EA].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
 	}
 	if (file[i][0] == 'W')
 	{
 		path_checker(game, WE);
-		game->textures[WE].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
+		game->parser.textures[WE].path = ft_substr(file[i], j, ft_strlen(file[i]) - j);
 	}
 }
 
@@ -71,17 +71,17 @@ static void	color_parser(char **file, int i, int j, t_game *game)
 	j = (arr[0] << 16) | (arr[1] << 8) | arr[2];
 	if (file[i][0] == 'C')
 	{
-		if (game->has_ceiling)
+		if (game->parser.has_ceiling)
 			exit(printf("duplicate ceiling color"));
-		game->ceiling_color = j;
-		game->has_ceiling = 1;
+		game->parser.ceiling_color = j;
+		game->parser.has_ceiling = 1;
 	}
 	else
 	{
-		if (game->has_floor)
+		if (game->parser.has_floor)
 			exit(printf("duplicate floor color"));
-		game->floor_color = j;
-		game->has_floor = 1;
+		game->parser.floor_color = j;
+		game->parser.has_floor = 1;
 	}
 }
 
@@ -128,9 +128,9 @@ void	parse_data(t_game *game, char **file)
 	}
 	if (!file[i])
 		exit(printf("invalid input"));
-	if (!game->textures[NO].path || !game->textures[SO].path
-		|| !game->textures[WE].path || !game->textures[EA].path
-		|| !game->has_floor || !game->has_ceiling)
+	if (!game->parser.textures[NO].path || !game->parser.textures[SO].path
+		|| !game->parser.textures[WE].path || !game->parser.textures[EA].path
+		|| !game->parser.has_floor || !game->parser.has_ceiling)
 		exit(printf("missing elements"));
 	map_parser(file, i, game);
 }

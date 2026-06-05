@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:30:29 by kadas             #+#    #+#             */
-/*   Updated: 2026/05/13 21:09:36 by kadas            ###   ########.fr       */
+/*   Updated: 2026/06/05 10:30:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,22 @@ typedef struct s_texture
 	int			endian;
 }				t_texture;
 
+typedef struct s_parser
+{
+    char        **map;
+    int         map_width;
+    int         map_height;
+    int         floor_color;
+    int         ceiling_color;
+    int         has_floor;
+    int         has_ceiling;
+    t_texture   textures[4];
+    t_player    player;
+}   t_parser;
+
 typedef struct s_game
 {
-	char		**map;
-	int			map_width;
-	int			map_height;
-	int			floor_color;
-	int			ceiling_color;
-	int			has_floor;
-	int			has_ceiling;
-	t_texture	textures[4];
-	t_player	player;
+	t_parser	parser;
 	void		*mlx;
 	void		*win;
 	void		*img;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:43:14 by kadas             #+#    #+#             */
-/*   Updated: 2026/05/13 21:10:07 by kadas            ###   ########.fr       */
+/*   Updated: 2026/06/05 10:33:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Error\n", 6));
 	ft_memset(&game, 0, sizeof(t_game));
 	parse_data(&game, file);
-	if (!isvalid(game.map))
+	if (!isvalid(game.parser.map))
 	{
 		free_game(&game);
 		return (write(2, "Error\n", 6));
