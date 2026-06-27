@@ -1,5 +1,16 @@
-#include "main.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/27 15:42:10 by kadas             #+#    #+#             */
+/*   Updated: 2026/06/27 15:42:10 by kadas            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "header/cub3d.h"
 static void	draw_tex(t_game *game, int x)
 {
 	if (game->drow.start < 0)
@@ -36,7 +47,7 @@ static void	draw_col(t_game *game, int x)
 	do_DDA(game, camera_x);
 	get_side(game);
 	get_drow_start_end(game);
-	game->side = game->ray.side;
+	game->hit_side = game->ray.side;
 	draw_tex(game, x);
 }
 

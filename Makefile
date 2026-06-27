@@ -1,14 +1,24 @@
-NAME = raycast
+NAME = cub3d
 
-SRCS = main.c mlx_init.c render.c render_utiles.c draw_texture.c raycasting_utilis.c raycastoing.c playermove.c hooks_handler.c
+SRCS =	main.c bridge.c mlx_init.c render.c render_utiles.c draw_texture.c \
+		raycasting_utilis.c raycastoing.c playermove.c hooks_handler.c \
+		parse/parse_data.c parse/read_map.c parse/vaildation.c \
+		parse/init_player.c parse/utils.c \
+		header/get_next_line.c header/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
-CFLAGS = -Wall -Wextra -O2
-LDFLAGS = -lmlx -lX11 -lXext -lm
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
+LDFLAGS	= -Lminilibx-linux -lmlx -lX11 -lXext -lm -Llibft -lft
 
-all: $(NAME)
+all: minilibx-linux/libmlx.a libft/libft.a $(NAME)
+
+minilibx-linux/libmlx.a:
+	make -C minilibx-linux
+
+libft/libft.a:
+	make -C libft
 
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)

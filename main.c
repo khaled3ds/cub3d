@@ -1,40 +1,40 @@
-#include "main.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/27 17:31:02 by kadas             #+#    #+#             */
+/*   Updated: 2026/06/27 17:31:02 by kadas            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	main(void)
+#include "header/cub3d.h"
+
+int	main(int argc, char **argv)
 {
 	t_game	game;
+	char	**file;
 
-	init_game(&game);
+	if (argc != 2)
+		return (write(2, "Error\nUsage: ./cub3d map.cub\n", 29));
+	ft_memset(&game, 0, sizeof(t_game));
+	file = inputer(argv[1]);
+	parse_data(&game, file);
+	free_all(file);
+	if (!isvalid(game.map))
+	{
+		free_game(&game);
+		return (write(2, "Error\nInvalid map\n", 18));
+	}
+	init_player(&game);
+	init_mlx(&game);
+	bridge_player(&game);
+	bridge_textures(&game);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 17, 0, end_game, &game);
 	mlx_loop_hook(game.mlx, render_loop, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }
-// #include "main.h"
-// // Abstracted hook registration: not in main directly
-// static void	register_hooks(t_game *g)
-// {
-// 	mlx_hook(g->win, 2, 1L << 0, key_press, g);
-// 	mlx_loop_hook(g->mlx, render_loop, g);
-// }
-// int	main(int argc, char **argv)
-// {
-// 	t_game	game;
-// 	// New: Argument-based pre-phase (safe with or without use)
-// 	if (argc > 1)
-// 		printf("Starting with argument: %s\n", argv[1]);
-// 	init_game(&game);
-// 	// Swapped order with dummy usable step
-// 	if (game.win)
-// 		register_hooks(&game);
-// 	else
-// 	{
-// 		fprintf(stderr, "Failed to create window!\n");
-// 		return (1);
-// 	}
-// 	// Post-setup placeholder: can be removed for real, here for shuffling
-// 	if (argc > 2)
-// 		printf("Note: extra arg detected.\n");
-// 	mlx_loop(game.mlx);
-// 	return (0);
-// }
