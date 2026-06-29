@@ -17,9 +17,9 @@ static void	draw_tex(t_game *game, int x)
 		game->drow.start = 0;
 	if (game->drow.end >= HEIGHT)
 		game->drow.end = HEIGHT - 1;
-	draw_ceiling(game->pixel, x, 0, game->drow.start, &game->images);
-	draw_wall(game, &game->images);
-	draw_floor(game->pixel, x, game->drow.end + 1, HEIGHT, &game->images);
+	draw_ceiling(game->pixel, x, 0, game->drow.start, game->ceiling_color);
+	draw_wall(game, &game->images, x);
+	draw_floor(game->pixel, x, game->drow.end + 1, HEIGHT, game->floor_color);
 }
 
 

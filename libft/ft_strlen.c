@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 14:43:08 by kadas             #+#    #+#             */
-/*   Updated: 2025/08/09 09:34:43 by kadas            ###   ########.fr       */
+/*   Created: 2025/08/10 19:25:36 by aalmoman          #+#    #+#             */
+/*   Updated: 2025/08/14 18:51:24 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	while (str[i])
+	{
 		i++;
+	}
 	return (i);
 }
+// int main()
+// {
+// 	printf("%zu",ft_strlen(""));
+// }

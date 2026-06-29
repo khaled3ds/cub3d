@@ -3,29 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/08 19:50:59 by kadas             #+#    #+#             */
-/*   Updated: 2025/08/10 21:25:23 by kadas            ###   ########.fr       */
+/*   Created: 2025/08/10 19:26:05 by aalmoman          #+#    #+#             */
+/*   Updated: 2025/08/14 18:35:08 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+size_t	fronttrim(char const *s1, char const *set)
 {
 	size_t	i;
 	size_t	j;
 
+	i = 0;
+	while (s1[i])
+	{
+		j = 0;
+		while (set[j] && s1[i] != set[j])
+			j++;
+		if (!set[j])
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+size_t	endtrim(char const *s1, char const *set, size_t start)
+{
+	size_t	end;
+	size_t	j;
+
+	end = 0;
+	while (s1[end])
+		end++;
+	while (end > start)
+	{
+		j = 0;
+		while (set[j] && s1[end - 1] != set[j])
+			j++;
+		if (!set[j])
+			break ;
+		end--;
+	}
+	return (end);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	start;
+	size_t	end;
+	char	*res;
+	size_t	i;
+
 	if (!s1 || !set)
 		return (NULL);
+	start = fronttrim(s1, set);
+	end = endtrim(s1, set, start);
+	res = (char *)malloc(sizeof(char) * (end - start + 1));
+	if (!res)
+		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s1) && ft_strchr(set, s1[i]))
-		i++;
-	j = ft_strlen(s1) - 1;
-	while (j > i && ft_strchr(set, s1[j]))
-	{
-		j--;
-	}
-	return (ft_substr(s1, i, j - i + 1));
+	while (start < end)
+		res[i++] = s1[start++];
+	res[i] = '\0';
+	return (res);
 }

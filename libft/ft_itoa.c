@@ -3,77 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/09 10:07:29 by kadas             #+#    #+#             */
-/*   Updated: 2025/08/10 15:10:20 by kadas            ###   ########.fr       */
+/*   Created: 2025/08/12 21:54:47 by aalmoman          #+#    #+#             */
+/*   Updated: 2025/08/15 00:18:27 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 static int	numlen(int n)
 {
-	int	counter;
+	int		len;
+	long	num;
 
-	counter = 0;
-	if (n == 0)
-		return (1);
-	else if (n < 0)
-		counter++;
-	while (n)
+	len = 0;
+	num = n;
+	if (num <= 0)
+		len++;
+	while (num != 0)
 	{
-		counter++;
-		n /= 10;
+		num /= 10;
+		len++;
 	}
-	return (counter);
-}
-
-static char	*itoa_fill(char *c, long num, size_t i)
-{
-	c[i] = '\0';
-	if (num > 0)
-	{
-		while (i > 0)
-		{
-			c[i - 1] = (num % 10) + '0';
-			i--;
-			num /= 10;
-		}
-	}
-	else if (num < 0)
-	{
-		c[0] = '-';
-		num = -num;
-		while (i > 1)
-		{
-			c[i - 1] = (num % 10) + '0';
-			i--;
-			num /= 10;
-		}
-	}
-	return (c);
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	i;
-	char	*c;
+	int		len;
 	long	num;
+	char	*str;
 
 	num = n;
-	i = numlen(num);
-	c = malloc(sizeof(char) * (i + 1));
-	if (!c)
+	len = numlen(n);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
+	str[len--] = '\0';
 	if (num == 0)
+		str[0] = '0';
+	if (num < 0)
 	{
-		c[1] = '\0';
-		c[0] = '0';
-		return (c);
+		str[0] = '-';
+		num *= -1;
 	}
-	else
-		c = itoa_fill(c, num, i);
-	return (c);
+	while (num > 0)
+	{
+		str[len--] = (num % 10) + '0';
+		num /= 10;
+	}
+	return (str);
 }

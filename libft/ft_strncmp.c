@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 10:10:19 by kadas             #+#    #+#             */
-/*   Updated: 2025/08/09 09:34:48 by kadas            ###   ########.fr       */
+/*   Created: 2025/08/10 19:25:44 by aalmoman          #+#    #+#             */
+/*   Updated: 2025/08/13 00:16:36 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	tmp;
+	size_t	i;
 
-	tmp = 0;
-	while ((s1[tmp] || s2[tmp]) && tmp < n)
+	i = 0;
+	while (i < n)
 	{
-		if (s1[tmp] > s2[tmp])
-			return ((unsigned char)s1[tmp] - (unsigned char)s2[tmp]);
-		else if (s1[tmp] < s2[tmp])
-			return ((unsigned char)s1[tmp] - (unsigned char)s2[tmp]);
-		tmp++;
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		if (s1[i] == '\0')
+		{
+			return (0);
+		}
+		i++;
 	}
 	return (0);
 }

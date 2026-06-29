@@ -30,8 +30,16 @@ void free_map(t_game *game)
 }
 int	end_game(t_game *game)
 {
+	int	i;
 
 	free_map(game);
+	i = 0;
+	while (i < 4)
+	{
+		if (game->textures[i].path)
+			free(game->textures[i].path);
+		i++;
+	}
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
@@ -67,11 +75,11 @@ int	key_press(int key, t_game *game)
 	if (key == W || key == 'w')
 		w_move(game);
 	if (key == A || key == 'a')
-		a_move(game);
+		d_move(game);
 	if (key == S || key == 's')
 		s_move(game);
 	if (key == D || key == 'd')
-		d_move(game);
+		a_move(game);
 	if (key == LEFT)
 		rotate(game, -ROTATE_SPEED);
 	if (key == RIGHT)

@@ -6,7 +6,7 @@
 /*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 17:28:31 by kadas             #+#    #+#             */
-/*   Updated: 2026/06/27 17:28:42 by kadas            ###   ########.fr       */
+/*   Updated: 2026/06/29 23:03:31 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	bridge_textures(t_game *game)
 {
 	int		i;
 	void	*img;
+	int	endian;
 
 	i = 0;
 	while (i < 4)
@@ -40,7 +41,7 @@ void	bridge_textures(t_game *game)
 		game->images.walls[i].img = img;
 		game->images.walls[i].address = mlx_get_data_addr(img,
 				&game->images.walls[i].bitpp,
-				&game->images.walls[i].line_size, 0);
+				&game->images.walls[i].line_size, &endian);
 		i++;
 	}
 }

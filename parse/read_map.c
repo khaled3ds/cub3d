@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:45:10 by kadas             #+#    #+#             */
-/*   Updated: 2026/05/13 01:56:09 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/30 00:54:08 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static char	*map_reader(char *all, int fd)
 	while (line)
 	{
 		tmp = all;
-		all = ft_strjoi(tmp, line);
+		all = ft_strjoin(tmp, line);
+		free(tmp);
 		free(line);
 		if (!all)
 			return (NULL);

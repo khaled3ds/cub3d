@@ -4,7 +4,6 @@ SRCS =	main.c bridge.c mlx_init.c render.c render_utiles.c draw_texture.c \
 		raycasting_utilis.c raycastoing.c playermove.c hooks_handler.c \
 		parse/parse_data.c parse/read_map.c parse/vaildation.c \
 		parse/init_player.c parse/utils.c \
-		header/get_next_line.c header/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

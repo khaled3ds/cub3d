@@ -13,24 +13,14 @@
 #include "header/cub3d.h"
 static void	set_delta_dist(t_rayCasting *ray)
 {
-	if (ray->ray_dir.y == 0)
-		ray->delta_dist.x = 0;
-	else
-	{
-		if (ray->ray_dir.x == 0)
-			ray->delta_dist.x = 1;
-		else
-			ray->delta_dist.x = fabs(1 / ray->ray_dir.x);
-	}
 	if (ray->ray_dir.x == 0)
-		ray->delta_dist.y = 0;
+		ray->delta_dist.x = 1e30;
 	else
-	{
-		if (ray->ray_dir.y == 0)
-			ray->delta_dist.y = 1;
-		else
-			ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
-	}
+		ray->delta_dist.x = fabs(1.0 / ray->ray_dir.x);
+	if (ray->ray_dir.y == 0)
+		ray->delta_dist.y = 1e30;
+	else
+		ray->delta_dist.y = fabs(1.0 / ray->ray_dir.y);
 }
 
 void do_DDA(t_game *game, double camera_x)
@@ -48,8 +38,12 @@ void do_DDA(t_game *game, double camera_x)
 			update_xray(game);
 			update_yray(game);
 		}
-		if (game->map[game->ray.map_pos.y][game->ray.map_pos.x] == '1')
-			game->ray.hit = 1;
+		if (game->ray.map_pos.y < 0 || game->ray.map_pos.y >= game->map_height
+    		|| game->ray.map_pos.x < 0
+    		|| game->ray.map_pos.x >= (int)ft_strlen(game->map[game->ray.map_pos.y]))
+    			game->ray.hit = 1;
+else if (game->map[game->ray.map_pos.y][game->ray.map_pos.x] == '1')
+    game->ray.hit = 1;
 	}	
 	if (game->ray.is_y_side == 0)
 		game->ray.wall_dist = (game->ray.map_pos.x - game->pov.pos.x + (1 - game->ray.steps.x) / 2.0)

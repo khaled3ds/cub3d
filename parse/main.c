@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 17:43:14 by kadas             #+#    #+#             */
-/*   Updated: 2026/06/05 10:33:51 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/29 23:11:46 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static void	right_input(int argc, char *argv)
 	}
 }
 
-int	main(int argc, char **argv)
-{
 	char	**file;
 	t_game	game;
 

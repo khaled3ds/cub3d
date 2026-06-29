@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 01:47:52 by marvin            #+#    #+#             */
-/*   Updated: 2026/06/05 10:32:04 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/29 23:09:20 by kadas            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	parse_data(t_game *game, char **file)
 {
 	int	i;
 	int	j;
+	int	len;
 
 	i = 0;
 	while (file[i] && not_map(file, i))
@@ -133,4 +134,17 @@ void	parse_data(t_game *game, char **file)
 		|| !game->has_floor || !game->has_ceiling)
 		exit(printf("missing elements"));
 	map_parser(file, i, game);
+	i = 0;
+	while (game->map[i])
+		i++;
+	game->map_height = i;
+	game->map_width = 0;
+	i = 0;
+	while (game->map[i])
+	{
+		len = ft_strlen(game->map[i]);
+		if (len > game->map_width)
+			game->map_width = len;
+		i++;
+	}
 }
