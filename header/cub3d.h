@@ -125,11 +125,13 @@ typedef struct s_game
 	int			has_ceiling;
 	t_texture	textures[4];
 	t_player	player;
+	int		keys[65400];
 }	t_game;
 
 char	*get_next_line(int fd);
-char	*ft_strjoi(char *s1, char *s2);
 char	**inputer(char *cub);
+int		key_release(int key, t_game *game);
+void	handle_keys(t_game *game);
 void	parse_data(t_game *game, char **file);
 void	color_parser_helper(int arr[], char *substring);
 void	path_checker(t_game *game, int i);

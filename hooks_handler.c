@@ -72,17 +72,30 @@ int	key_press(int key, t_game *game)
 {
 	if (key == ESC)
 		end_game(game);
-	if (key == W || key == 'w')
-		w_move(game);
-	if (key == A || key == 'a')
-		d_move(game);
-	if (key == S || key == 's')
-		s_move(game);
-	if (key == D || key == 'd')
-		a_move(game);
-	if (key == LEFT)
-		rotate(game, -ROTATE_SPEED);
-	if (key == RIGHT)
-		rotate(game, ROTATE_SPEED);
+	if (key < 65400)
+		game->keys[key] = 1;
 	return (0);
+}
+
+int	key_release(int key, t_game *game)
+{
+	if (key < 65400)
+		game->keys[key] = 0;
+	return (0);
+}
+
+void	handle_keys(t_game *game)
+{
+	if (game->keys[W] || game->keys['w'])
+		w_move(game);
+	if (game->keys[A] || game->keys['a'])
+		d_move(game);
+	if (game->keys[S] || game->keys['s'])
+		s_move(game);
+	if (game->keys[D] || game->keys['d'])
+		a_move(game);
+	if (game->keys[LEFT])
+		rotate(game, -ROTATE_SPEED);
+	if (game->keys[RIGHT])
+		rotate(game, ROTATE_SPEED);
 }

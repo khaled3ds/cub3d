@@ -51,10 +51,12 @@ static void	draw_col(t_game *game, int x)
 	draw_tex(game, x);
 }
 
-int 	render(t_game *game)
+int	render(t_game *game)
 {
-	int x = -1;
-	
+	int	x;
+
+	handle_keys(game);
+	x = -1;
 	while (++x < WIDTH)
 		draw_col(game, x);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
