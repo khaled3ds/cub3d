@@ -44,6 +44,7 @@ static void	draw_col(t_game *game, int x)
 {
 	double camera_x = 2.0 * x / (double)WIDTH - 1.0;
 	
+	game->ray.hit=0;
 	do_DDA(game, camera_x);
 	get_side(game);
 	get_drow_start_end(game);

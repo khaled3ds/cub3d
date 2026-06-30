@@ -51,23 +51,6 @@ int	end_game(t_game *game)
 	return (0);
 }
 
-void	rotate(t_game *game, double ang)
-{
-	double	cos_ang;
-	double	sin_ang;
-	double	old_dir_x;
-	double	old_plane_x;
-
-	cos_ang = cos(ang);
-	sin_ang = sin(ang);
-	old_dir_x = game->pov.dir.x;
-	old_plane_x = game->pov.plane.x;
-	game->pov.dir.x = old_dir_x * cos_ang - game->pov.dir.y * sin_ang;
-	game->pov.dir.y = old_dir_x * sin_ang + game->pov.dir.y * cos_ang;
-	game->pov.plane.x = old_plane_x * cos_ang - game->pov.plane.y * sin_ang;
-	game->pov.plane.y = old_plane_x * sin_ang + game->pov.plane.y * cos_ang;
-}
-
 int	key_press(int key, t_game *game)
 {
 	if (key == ESC)

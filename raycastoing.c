@@ -25,7 +25,6 @@ static void	set_delta_dist(t_rayCasting *ray)
 
 void do_DDA(t_game *game, double camera_x)
 {
-	game->ray.hit = 0;
 	start_ray(game, camera_x);
 	while (!game->ray.hit)
 	{

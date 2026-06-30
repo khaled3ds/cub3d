@@ -12,14 +12,6 @@
 
 #include "header/cub3d.h"
 
-int	get_texture_color(t_texture *tex, int tex_x, int tex_y)
-{
-	char	*dst;
-
-	dst = tex->address + (tex_y * tex->line_size + tex_x * (tex->bitpp / 8));
-	return (*(unsigned int *)dst);
-}
-
 void	draw_floor(t_pixel pixel, int x, int y_start, int y_end, int color)
 {
 	int	y;
@@ -44,31 +36,10 @@ void	draw_ceiling(t_pixel pixel, int x, int y_start, int y_end, int color)
 	}
 }
 
-void	draw_wall(t_game *game, t_images *images, int x)//argument num exceed make a function for the initilization and one for the loop and a main one for the call
+void	draw_wall(t_game *game, t_images *images, int x)
 {
-	int	y;
-	int	tex_y;
-	double	step;
-	double	tex_pos;
-	int	color;
-	int	wall_tex_x;
-	t_side	side;
+	t_wall_draw	wd;
 
-	side = game->ray.side;
-	wall_tex_x = get_wall_tex_x(game);
-	step = (double)images->walls[side].height / (double)game->drow.wall_height;
-	tex_pos = (game->drow.start - HEIGHT / 2 + game->drow.wall_height / 2) * step;
-	y = game->drow.start;
-	while (y <= game->drow.end)
-	{
-		tex_y = (int)tex_pos;
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= images->walls[side].height)
-			tex_y = images->walls[side].height - 1;
-		color = get_texture_color(&images->walls[side], wall_tex_x, tex_y);
-		draw_pixel(game->pixel, x, y, color);
-		tex_pos += step;
-		y++;
-	}
+	init_wall(game, images, &wd);
+	draw_wall_loop(game, images, x, &wd);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   playermove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/27 15:41:47 by kadas             #+#    #+#             */
-/*   Updated: 2026/06/27 15:41:47 by kadas            ###   ########.fr       */
+/*   Created: 2026/06/30 22:30:26 by aalmoman          #+#    #+#             */
+/*   Updated: 2026/06/30 22:30:26 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
 
-static int	is_valid(t_game *game, int x, int y)
+int	is_valid(t_game *game, int x, int y)
 {
 	if (!game || !game->map)
 		return (0);
@@ -21,38 +21,6 @@ static int	is_valid(t_game *game, int x, int y)
 	if (game->map[y][x] == '1')
 		return (0);
 	return (1);
-}
-
-void	w_move(t_game *game)
-{
-	if (is_valid(game, (int)(game->pov.pos.x + game->pov.dir.x * MOVE_SPEED), (int)game->pov.pos.y))
-		game->pov.pos.x += game->pov.dir.x * MOVE_SPEED;
-	if (is_valid(game, (int)game->pov.pos.x, (int)(game->pov.pos.y + game->pov.dir.y * MOVE_SPEED)))
-		game->pov.pos.y += game->pov.dir.y * MOVE_SPEED;
-}
-
-void	a_move(t_game *game)
-{
-	if (is_valid(game, (int)(game->pov.pos.x - game->pov.dir.y * MOVE_SPEED), (int)game->pov.pos.y))
-		game->pov.pos.x -= game->pov.dir.y * MOVE_SPEED;
-	if (is_valid(game, (int)game->pov.pos.x, (int)(game->pov.pos.y + game->pov.dir.x * MOVE_SPEED)))
-		game->pov.pos.y += game->pov.dir.x * MOVE_SPEED;
-}
-
-void	s_move(t_game *game)
-{
-	if (is_valid(game, (int)(game->pov.pos.x - game->pov.dir.x * MOVE_SPEED), (int)game->pov.pos.y))
-		game->pov.pos.x -= game->pov.dir.x * MOVE_SPEED;
-	if (is_valid(game, (int)game->pov.pos.x, (int)(game->pov.pos.y - game->pov.dir.y * MOVE_SPEED)))
-		game->pov.pos.y -= game->pov.dir.y * MOVE_SPEED;
-}
-
-void	d_move(t_game *game)
-{
-	if (is_valid(game, (int)(game->pov.pos.x + game->pov.dir.y * MOVE_SPEED), (int)game->pov.pos.y))
-		game->pov.pos.x += game->pov.dir.y * MOVE_SPEED;
-	if (is_valid(game, (int)game->pov.pos.x, (int)(game->pov.pos.y - game->pov.dir.x * MOVE_SPEED)))
-		game->pov.pos.y -= game->pov.dir.x * MOVE_SPEED;
 }
 
 void	move_player(t_game *game, int keycode)

@@ -128,6 +128,17 @@ typedef struct s_game
 	int		keys[65400];
 }	t_game;
 
+typedef struct s_wall_draw
+{
+	int		y;
+	int		tex_y;
+	double	step;
+	double	tex_pos;
+	int		color;
+	int		wall_tex_x;
+	t_side	side;
+}	t_wall_draw;
+
 char	*get_next_line(int fd);
 char	**inputer(char *cub);
 int		key_release(int key, t_game *game);
@@ -159,6 +170,8 @@ int		get_wall_tex_x(t_game *game);
 void	draw_pixel(t_pixel pixel, int x, int y, int color);
 void	draw_ceiling(t_pixel pixel, int x, int y_start, int y_end, int color);
 void	draw_floor(t_pixel pixel, int x, int y_start, int y_end, int color);
+void	init_wall(t_game *game, t_images *images, t_wall_draw *wd);
+void	draw_wall_loop(t_game *game, t_images *images, int x, t_wall_draw *wd);
 void	draw_wall(t_game *game, t_images *images, int x);
 void	free_map(t_game *game);
 void	w_move(t_game *game);
@@ -169,5 +182,6 @@ void	rotate(t_game *game, double ang);
 int		end_game(t_game *game);
 int		key_press(int key, t_game *game);
 void	move_player(t_game *game, int keycode);
+int		is_valid(t_game *game, int x, int y);
 
 #endif
