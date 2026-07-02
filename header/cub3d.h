@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/02 03:04:51 by aalmoman          #+#    #+#             */
+/*   Updated: 2026/07/02 03:08:00 by aalmoman         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 
 #ifndef CUB3D_H
@@ -10,26 +22,26 @@
 # include <unistd.h>
 # include <stdio.h>
 
-# define WIDTH        1280
-# define HEIGHT       720
+# define WIDTH 1280
+# define HEIGHT 720
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
 
-# define NO  0
-# define SO  1
-# define WE  2
-# define EA  3
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
-# define W            119
-# define A            97
-# define S            115
-# define D            100
-# define ESC          65307
-# define LEFT         65361
-# define RIGHT        65363
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define ESC 65307
+# define LEFT 65361
+# define RIGHT 65363
 
-# define MOVE_SPEED   0.05
+# define MOVE_SPEED 0.01
 # define ROTATE_SPEED 0.04
 typedef struct s_daxis
 {
@@ -159,7 +171,7 @@ void	x_side_dist(t_game *game);
 void	move_dir(t_game *game);
 void	update_xray(t_game *game);
 void	update_yray(t_game *game);
-void	do_DDA(t_game *game, double camera_x);
+void	do_dda(t_game *game);
 void	start_ray(t_game *game, double camera_x);
 int		get_texture_color(t_texture *tex, int tex_x, int tex_y);
 void	get_side(t_game *game);
@@ -168,8 +180,8 @@ int		render(t_game *game);
 int		render_loop(void *param);
 int		get_wall_tex_x(t_game *game);
 void	draw_pixel(t_pixel pixel, int x, int y, int color);
-void	draw_ceiling(t_pixel pixel, int x, int y_start, int y_end, int color);
-void	draw_floor(t_pixel pixel, int x, int y_start, int y_end, int color);
+void	draw_ceiling(t_game *game, int x, int y_end);
+void	draw_floor(t_game *game, int x, int y_end);
 void	init_wall(t_game *game, t_images *images, t_wall_draw *wd);
 void	draw_wall_loop(t_game *game, t_images *images, int x, t_wall_draw *wd);
 void	draw_wall(t_game *game, t_images *images, int x);
@@ -183,5 +195,8 @@ int		end_game(t_game *game);
 int		key_press(int key, t_game *game);
 void	move_player(t_game *game, int keycode);
 int		is_valid(t_game *game, int x, int y);
+void	update_wall_dist(t_game	*game);
+void	tex_checker(t_game *game, char **file, int i, int len);
+void	map_parser(char **file, int i, t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 19:46:40 by kadas             #+#    #+#             */
-/*   Updated: 2026/06/05 10:37:16 by marvin           ###   ########.fr       */
+/*   Updated: 2026/07/02 03:03:54 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,26 @@ void	free_game(t_game *game)
 		i++;
 	}
 	free_all(game->map);
+}
+
+void	tex_checker(t_game *game, char **file, int i, int len)
+{
+	if (!game->textures[NO].path || !game->textures[SO].path
+		|| !game->textures[WE].path || !game->textures[EA].path
+		|| !game->has_floor || !game->has_ceiling)
+		exit(printf("missing elements"));
+	map_parser(file, i, game);
+	i = 0;
+	while (game->map[i])
+		i++;
+	game->map_height = i;
+	game->map_width = 0;
+	i = 0;
+	while (game->map[i])
+	{
+		len = ft_strlen(game->map[i]);
+		if (len > game->map_width)
+			game->map_width = len;
+		i++;
+	}
 }

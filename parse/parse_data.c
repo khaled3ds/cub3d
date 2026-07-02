@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 01:47:52 by marvin            #+#    #+#             */
-/*   Updated: 2026/06/30 01:37:29 by kadas            ###   ########.fr       */
+/*   Updated: 2026/07/02 03:07:53 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	color_parser(char **file, int i, int j, t_game *game)
 	}
 }
 
-static void	map_parser(char **file, int i, t_game *game)
+void	map_parser(char **file, int i, t_game *game)
 {
 	int		j;
 	char	**map;
@@ -114,7 +114,10 @@ void	parse_data(t_game *game, char **file)
 	int	j;
 	int	len;
 
+	len = 0;
 	i = 0;
+	if (!file)
+		exit(printf("invalid input\n"));
 	while (file[i] && not_map(file, i))
 	{
 		j = 0;
@@ -127,24 +130,5 @@ void	parse_data(t_game *game, char **file)
 			exit(printf("invalid input"));
 		i++;
 	}
-	if (!file[i])
-		exit(printf("invalid input"));
-	if (!game->textures[NO].path || !game->textures[SO].path
-		|| !game->textures[WE].path || !game->textures[EA].path
-		|| !game->has_floor || !game->has_ceiling)
-		exit(printf("missing elements"));
-	map_parser(file, i, game);
-	i = 0;
-	while (game->map[i])
-		i++;
-	game->map_height = i;
-	game->map_width = 0;
-	i = 0;
-	while (game->map[i])
-	{
-		len = ft_strlen(game->map[i]);
-		if (len > game->map_width)
-			game->map_width = len;
-		i++;
-	}
+	tex_checker(game, file, i, len);
 }

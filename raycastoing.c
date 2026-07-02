@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
+
 static void	set_delta_dist(t_rayCasting *ray)
 {
 	if (ray->ray_dir.x == 0)
@@ -23,9 +24,18 @@ static void	set_delta_dist(t_rayCasting *ray)
 		ray->delta_dist.y = fabs(1.0 / ray->ray_dir.y);
 }
 
-void do_DDA(t_game *game, double camera_x)
+void	update_wall_dist(t_game *game)
 {
-	start_ray(game, camera_x);
+	if (game->ray.is_y_side == 0)
+		game->ray.wall_dist = (game->ray.map_pos.x - game->pov.pos.x
+				+ (1 - game->ray.steps.x) / 2.0) / game->ray.ray_dir.x;
+	else
+		game->ray.wall_dist = (game->ray.map_pos.y - game->pov.pos.y
+				+ (1 - game->ray.steps.y) / 2.0) / game->ray.ray_dir.y;
+}
+
+void	do_dda(t_game *game)
+{
 	while (!game->ray.hit)
 	{
 		if (game->ray.side_dist.x < game->ray.side_dist.y)
@@ -37,22 +47,19 @@ void do_DDA(t_game *game, double camera_x)
 			update_xray(game);
 			update_yray(game);
 		}
-		if (game->ray.map_pos.y < 0 || game->ray.map_pos.y >= game->map_height
-    		|| game->ray.map_pos.x < 0
-    		|| game->ray.map_pos.x >= (int)ft_strlen(game->map[game->ray.map_pos.y]))
-    			game->ray.hit = 1;
-else if (game->map[game->ray.map_pos.y][game->ray.map_pos.x] == '1')
-    game->ray.hit = 1;
-	}	
-	if (game->ray.is_y_side == 0)
-		game->ray.wall_dist = (game->ray.map_pos.x - game->pov.pos.x + (1 - game->ray.steps.x) / 2.0)
-			/ game->ray.ray_dir.x;
-	else
-		game->ray.wall_dist = (game->ray.map_pos.y - game->pov.pos.y + (1 - game->ray.steps.y) / 2.0)
-			/ game->ray.ray_dir.y;
+		if (game->ray.map_pos.y < 0
+			|| game->ray.map_pos.y >= game->map_height
+			|| game->ray.map_pos.x < 0
+			|| game->ray.map_pos.x >= (int)ft_strlen(
+				game->map[game->ray.map_pos.y]))
+			game->ray.hit = 1;
+		else if (game->map[game->ray.map_pos.y][game->ray.map_pos.x] == '1')
+			game->ray.hit = 1;
+	}
+	update_wall_dist(game);
 }
 
-void start_ray(t_game *game, double camera_x)
+void	start_ray(t_game *game, double camera_x)
 {
 	game->ray.ray_dir.x = game->pov.dir.x + game->pov.plane.x * camera_x;
 	game->ray.ray_dir.y = game->pov.dir.y + game->pov.plane.y * camera_x;

@@ -11,14 +11,15 @@
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
+
 void	init_wall(t_game *game, t_images *images, t_wall_draw *wall)
 {
 	wall->side = game->ray.side;
 	wall->wall_tex_x = get_wall_tex_x(game);
 	wall->step = (double)images->walls[wall->side].height
 		/ (double)game->drow.wall_height;
-	wall->tex_pos = (game->drow.start - HEIGHT / 2 + game->drow.wall_height / 2)
-		* wall->step;
+	wall->tex_pos = (game->drow.start - HEIGHT / 2
+			+ game->drow.wall_height / 2) * wall->step;
 	wall->y = game->drow.start;
 }
 
@@ -38,6 +39,7 @@ void	draw_wall_loop(t_game *game, t_images *images, int x, t_wall_draw *wall)
 		wall->y++;
 	}
 }
+
 int	get_texture_color(t_texture *tex, int tex_x, int tex_y)
 {
 	char	*dst;
@@ -45,4 +47,3 @@ int	get_texture_color(t_texture *tex, int tex_x, int tex_y)
 	dst = tex->address + (tex_y * tex->line_size + tex_x * (tex->bitpp / 8));
 	return (*(unsigned int *)dst);
 }
-

@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
+
 static void	draw_tex(t_game *game, int x)
 {
 	if (game->drow.start < 0)
 		game->drow.start = 0;
 	if (game->drow.end >= HEIGHT)
 		game->drow.end = HEIGHT - 1;
-	draw_ceiling(game->pixel, x, 0, game->drow.start, game->ceiling_color);
+	draw_ceiling(game, x, game->drow.start);
 	draw_wall(game, &game->images, x);
-	draw_floor(game->pixel, x, game->drow.end + 1, HEIGHT, game->floor_color);
+	draw_floor(game, x, HEIGHT);
 }
-
 
 int	get_wall_tex_x(t_game *game)
 {
@@ -42,10 +42,12 @@ int	get_wall_tex_x(t_game *game)
 
 static void	draw_col(t_game *game, int x)
 {
-	double camera_x = 2.0 * x / (double)WIDTH - 1.0;
-	
-	game->ray.hit=0;
-	do_DDA(game, camera_x);
+	double	camera_x;
+
+	camera_x = 2.0 * x / (double)WIDTH - 1.0;
+	game->ray.hit = 0;
+	start_ray(game, camera_x);
+	do_dda(game);
 	get_side(game);
 	get_drow_start_end(game);
 	game->hit_side = game->ray.side;
@@ -68,4 +70,3 @@ int	render_loop(void *param)
 {
 	return (render((t_game *)param));
 }
-

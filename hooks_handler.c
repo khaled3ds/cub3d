@@ -12,9 +12,9 @@
 
 #include "header/cub3d.h"
 
-void free_map(t_game *game)
+void	free_map(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->map)
@@ -28,6 +28,7 @@ void free_map(t_game *game)
 		free(game->map);
 	}
 }
+
 int	end_game(t_game *game)
 {
 	int	i;

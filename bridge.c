@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bridge.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kadas <kadas@student.42amman.com>          +#+  +:+       +#+        */
+/*   By: aalmoman <aalmoman@amman.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/27 17:28:31 by kadas             #+#    #+#             */
-/*   Updated: 2026/06/29 23:03:31 by kadas            ###   ########.fr       */
+/*   Updated: 2026/07/02 01:53:16 by aalmoman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	bridge_textures(t_game *game)
 {
 	int		i;
 	void	*img;
-	int	endian;
+	int		endian;
 
 	i = 0;
 	while (i < 4)

@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "header/cub3d.h"
-void get_side(t_game *game)
+
+void	get_side(t_game *game)
 {
 	if (!game)
 		return ;
@@ -25,7 +26,7 @@ void get_side(t_game *game)
 		game->ray.side = north;
 }
 
-void get_drow_start_end(t_game *game)
+void	get_drow_start_end(t_game *game)
 {
 	if (!game || game->ray.wall_dist <= 0)
 		return ;
@@ -36,8 +37,7 @@ void get_drow_start_end(t_game *game)
 	game->drow.end = game->drow.start + game->drow.wall_height;
 }
 
-
-void	draw_pixel(t_pixel pixel, int x, int y, int color) //this for drawing one pixel of the image per loop
+void	draw_pixel(t_pixel pixel, int x, int y, int color)
 {
 	char	*dst;
 

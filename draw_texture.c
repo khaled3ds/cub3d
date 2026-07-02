@@ -12,26 +12,26 @@
 
 #include "header/cub3d.h"
 
-void	draw_floor(t_pixel pixel, int x, int y_start, int y_end, int color)
+void	draw_floor(t_game *game, int x, int y_end)
 {
 	int	y;
 
-	y = y_start;
+	y = game->drow.end + 1;
 	while (y < y_end)
 	{
-		draw_pixel(pixel, x, y, color);
+		draw_pixel(game->pixel, x, y, game->floor_color);
 		y++;
 	}
 }
 
-void	draw_ceiling(t_pixel pixel, int x, int y_start, int y_end, int color)
+void	draw_ceiling(t_game *game, int x, int y_end)
 {
 	int	y;
 
-	y = y_start;
+	y = 0;
 	while (y < y_end)
 	{
-		draw_pixel(pixel, x, y, color);
+		draw_pixel(game->pixel, x, y, game->ceiling_color);
 		y++;
 	}
 }
